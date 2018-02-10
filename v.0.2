@@ -1,0 +1,99 @@
+// Simple guessing game v. 0.2
+// @Walery Susłow
+// @Mateusz Budniak
+// @Szymon Górka
+
+#include <time.h>
+#include <iostream>
+
+
+using namespace std;
+
+int main() 
+{     
+
+int mistakes = 0;
+int correctGuesses;
+int prevNum = 5, nextNum;
+char choice, menu;
+
+while (menu!= '3')
+{
+    
+cout << " ___________________________" << endl;
+cout << "|                          |" << endl;
+cout << "|   SIMPLE GUESSING GAME   |" << endl;
+cout << "|                          |" << endl;
+cout << "|    1-Start game          |"<< endl;
+cout << "|    2-Instructions        |" << endl;
+cout << "|    3-Exit game           |" << endl;
+cout << "|                          |" << endl;
+cout << "----------------------------" << endl;
+        cin >> menu;
+         
+
+switch(menu)
+{
+    case '1':
+do
+{
+    cout << "You are starting with number 5. Is the next number higher(write H) or lower(write L) ?" << endl;
+    srand ( time(NULL) );
+    do
+        nextNum = rand() % 11;
+    while (nextNum == prevNum);
+
+    cin >> choice;
+
+    if (choice == 'H' or choice == 'h')
+    {
+        if (prevNum < nextNum)
+        {
+            cout << "Correct ! The new number is " << nextNum << endl;
+            correctGuesses++;
+        }
+        else if (prevNum > nextNum)
+        {
+            cout << "Wrong, you made a mistake! The new number is " << nextNum << endl;
+            mistakes++;
+        }
+    }
+
+    if (choice == 'L' or choice == 'l')
+    {
+        if (prevNum > nextNum)
+        {
+            cout << "Correct ! The new number is " << nextNum << endl;
+            correctGuesses++;
+        }
+        else if (prevNum < nextNum)
+        {
+            cout << "Wrong, you made a mistake! The new number is " << nextNum << endl;
+            mistakes++;
+        }
+    }
+
+    prevNum = nextNum;
+}
+while(mistakes < 3);
+cout << endl;
+cout << "You've made 3 mistakes! Game is now over!" << endl;
+cout << "You had " << correctGuesses << " correct guesses before the game was over" << endl;
+break;
+
+case '2':
+cout << "This is a very simple number guessing game. Each time you will be given a number of the range 0-10." << endl; 
+cout << "The objective of the game is to guess whether the next number is going to be higher or not. As simple as that." << endl; 
+cout << "You have the ability to make no more than 3 mistakes before you lose, guess wisely." << endl;
+cout << "Have fun and share your score with friends! Good luck!" << endl << endl;
+
+break;
+
+default:
+cout << "Thanks for playing this game, to the next time!";
+break;
+}
+}
+
+return 0;
+}

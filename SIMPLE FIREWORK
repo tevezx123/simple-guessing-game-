@@ -1,0 +1,41 @@
+// Simple firework
+// @Szymon Górka
+
+#include <ncurses.h>
+#include <unistd.h>
+
+#define DELAY 100000
+
+int
+main (int argc, char *argv[])
+{
+  int x = 0, y = 0;
+
+  initscr ();
+  noecho ();
+  curs_set (FALSE);
+
+  while (x < 35)
+    {
+      mvprintw (38 - y, 40, "^");
+      mvprintw (39 - y, 40, "^");
+      mvprintw (40 - y, 40, "|");
+
+      refresh ();
+      usleep (DELAY);
+      y++;
+      x++;
+    }
+
+  clear ();
+
+  mvprintw (02, 37, "*      *");
+  mvprintw (03, 35, "*  **  **  *");
+  mvprintw (04, 36, "**  **  **");
+  mvprintw (05, 37, "*  **  *");
+  mvprintw (06, 39, "*  *");
+
+  refresh ();
+
+  return 0;
+}
